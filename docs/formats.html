@@ -266,14 +266,21 @@ With the <code>#</code> flag, octal values are prefixed with <code>0</code>
 and hexadecimal values with <code>0x</code> or <code>0X</code>.
 <p>
 Unlike printf, <code>%x</code> and <code>%X</code> truncate the
-output to the the given width (number of least significant half bytes).
-</p>
+output to the the given <em>width</em> (number of least significant half bytes).
 </p>
 <p>
 <b>Input:</b> <code>%d</code> matches signed decimal, <code>%u</code> matches
 unsigned decimal, <code>%o</code> unsigned octal.
 <code>%x</code> and <code>%X</code> both match upper or lower case unsigned
 hexadecimal.
+</p>
+<p>
+Using the <code>+</code> flag with <code>%x</code> or <code>%X</code>
+changes to signed mode. If <em>width</em> hex digits are read or
+<em>width</em> is not specified, the value will be sign extended according
+to the most significant input digit.
+</p>
+<p>
 Octal and hexadecimal values can optionally be prefixed.
 <code>%i</code> matches any integer in decimal, or prefixed octal or
 hexadecimal notation.

@@ -369,6 +369,18 @@ scanLong(const StreamFormat& fmt, const char* input, long& value)
     }
     v = strtoul(input, &end, base);
     if (end == input) return -1;
+    if (base == 16 && (fmt.flags & sign_flag) && end-input >= (long)fmt.width)
+    {
+        // sign-extend %+x if width is fully used
+        int i;
+        if (input[0] == '0' && tolower((unsigned char)input[1]) == 'x')
+            i = 2;
+        else
+            i = 0;
+        if (input[i] > '7' && (unsigned long)(end-input-i) < sizeof(long)*2) {
+            v |= -1L << (unsigned long)((end-input-i)*4);
+        }
+    }
     consumed += end-input;
     value = neg ? -v : v;
     return consumed;
