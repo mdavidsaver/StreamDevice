@@ -260,7 +260,7 @@ static ssize_t prepareval(const StreamFormat& fmt, const char*& input, bool& neg
 {
     size_t consumed = 0;
     neg = false;
-    while (isspace(*input)) { input++; consumed++; }
+    while (isspace((unsigned char)*input)) { input++; consumed++; }
     if (fmt.width)
     {
         // take local copy because strto* don't have width parameter
@@ -286,7 +286,7 @@ skipsign:
         input++;
         consumed++;
     }
-    if (isspace(*input))
+    if (isspace((unsigned char)*input))
     {
         // allow space after sign only if # flag is set
         if (!(fmt.flags & alt_flag)) return -1;
@@ -503,7 +503,7 @@ scanString(const StreamFormat& fmt, const char* input,
         else width = -1;
     }
 
-    while (isspace(*input) && width)
+    while (isspace((unsigned char)*input) && width)
     {
         // normally leading whitespace does not count to width
         // but do so if space flag is present
@@ -523,7 +523,7 @@ scanString(const StreamFormat& fmt, const char* input,
     {
         // normally whitespace ends string
         // but don't end if # flag is present
-        if (!(fmt.flags & alt_flag) && isspace(*input)) break;
+        if (!(fmt.flags & alt_flag) && isspace((unsigned char)*input)) break;
         if (space_left > 1)
         {
             *value++ = *input;

@@ -240,18 +240,18 @@ static void regsubst(const StreamFormat& fmt, StreamBuffer& buffer, size_t start
                         switch (ch)
                         {
                             case 'u':
-                                if (islower(s[r])) s[r] = toupper(s[r]);
+                                if (islower((unsigned char)s[r])) s[r] = toupper((unsigned char)s[r]);
                                 break;
                             case 'l':
-                                if (isupper(s[r])) s[r] = tolower(s[r]);
+                                if (isupper((unsigned char)s[r])) s[r] = tolower((unsigned char)s[r]);
                                 break;
                             case 'U':
                                 for (int i = 0; i < rl; i++)
-                                    if (islower(s[r+i])) s[r+i] = toupper(s[r+i]);
+                                    if (islower((unsigned char)s[r+i])) s[r+i] = toupper((unsigned char)s[r+i]);
                                 break;
                             case 'L':
                                 for (int i = 0; i < rl; i++)
-                                    if (isupper(s[r+i])) s[r+i] = tolower(s[r+i]);
+                                    if (isupper((unsigned char)s[r+i])) s[r+i] = tolower((unsigned char)s[r+i]);
                                 break;
                         }
                     }

@@ -710,34 +710,34 @@ initRecord(char* linkstring /* modifiable copy */)
 
     debug("Stream::initRecord %s: parse link string \"%s\"\n", name(), linkstring);
 
-    while (isspace(*linkstring)) linkstring++;
+    while (isspace((unsigned char)*linkstring)) linkstring++;
     filename = linkstring;
-    while (*linkstring && !isspace(*linkstring)) linkstring++;
+    while (*linkstring && !isspace((unsigned char)*linkstring)) linkstring++;
     if (*linkstring) *linkstring++ = 0;
 
-    while (isspace(*linkstring)) linkstring++;
+    while (isspace((unsigned char)*linkstring)) linkstring++;
     protocol = linkstring;
-    while (*linkstring && !isspace(*linkstring) && *linkstring != '(') linkstring++;
-    while (isspace(*linkstring)) linkstring++;
+    while (*linkstring && !isspace((unsigned char)*linkstring) && *linkstring != '(') linkstring++;
+    while (isspace((unsigned char)*linkstring)) linkstring++;
     if (*linkstring == '(') {
         int brackets = 0;
         while(*++linkstring) {
             if (*linkstring == '(') brackets++;
             else if (*linkstring == ')') brackets--;
             else if (*linkstring == '\\' && !*++linkstring) break;
-            else if (isspace(*linkstring) && brackets < 0) break;
+            else if (isspace((unsigned char)*linkstring) && brackets < 0) break;
         }
     }
     else if (*linkstring) linkstring--;
     if (*linkstring) *linkstring++ = 0;
 
-    while (isspace(*linkstring)) linkstring++;
+    while (isspace((unsigned char)*linkstring)) linkstring++;
     busname = linkstring;
-    while (*linkstring && !isspace(*linkstring)) linkstring++;
+    while (*linkstring && !isspace((unsigned char)*linkstring)) linkstring++;
     if (*linkstring) *linkstring++ = 0;
 
     if (linkstring) addr = strtol(linkstring, &linkstring, 0);
-    while (isspace(*linkstring)) linkstring++;
+    while (isspace((unsigned char)*linkstring)) linkstring++;
     busparam = linkstring;
 
     debug("Stream::initRecord %s: filename=\"%s\" protocol=\"%s\" bus=\"%s\" addr=%ld params=\"%s\"\n",

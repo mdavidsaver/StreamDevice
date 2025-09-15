@@ -68,7 +68,7 @@ extern "C" {
     static int mystrncasecmp(const char *s1, const char *s2, size_t n)
     {
         int r=0;
-        while (n && (r = toupper(*s1)-toupper(*s2)) == 0) { n--; s1++; s2++; };
+        while (n && (r = toupper((unsigned char)*s1)-toupper((unsigned char)*s2)) == 0) { n--; s1++; s2++; };
         return r;
     }
 }
@@ -511,7 +511,7 @@ static uint32_t adler32(const uint8_t* data, size_t len, uint32_t init)
 static uint32_t hexsum(const uint8_t* data, size_t len, uint32_t sum)
 {
     // Add all hex digits, ignore all other bytes.
-    uint32_t d;
+    unsigned char d;
     while (len--)
     {
         d = toupper(*data++);
@@ -581,7 +581,7 @@ static uint32_t lrc(const uint8_t* data, size_t len, uint32_t sum)
 // Longitudinal Redundancy Check using ASCII representation of numbers, 2-by-2
 static uint32_t hexlrc(const uint8_t* data, size_t len, uint32_t sum)
 {
-    uint32_t d;
+    unsigned char d;
     uint32_t final_digit = 0;
 
     while (len--)

@@ -166,7 +166,7 @@ readFile(const char* filename)
     // no path or absolute file name
     if (!path || filename[0] == '/'
 #ifdef _WIN32
-        || filename[0] == '\\' || (isalpha(filename[0]) && filename[1] == ':')
+        || filename[0] == '\\' || (isalpha((unsigned char)filename[0]) && filename[1] == ':')
 #endif
         ) {
         // absolute file name
@@ -186,7 +186,7 @@ readFile(const char* filename)
             // we need to be careful with drive letters though
             n = strcspn(p, ":;");
 #ifdef _WIN32
-            if (n == 1 && p[1] == ':' && isalpha(p[0]))
+            if (n == 1 && p[1] == ':' && isalpha((unsigned char)p[0]))
             {
                 // driver letter
                 n = 2 + strcspn(p+2, ":;");
@@ -197,7 +197,7 @@ readFile(const char* filename)
             // Windows is fine with / as well
             if (n) {
 #ifdef _WIN32
-                if (n != 2 || p[1] != ':' || !isalpha(p[0]))
+                if (n != 2 || p[1] != ':' || !isalpha((unsigned char)p[0]))
 #endif
                 dir.append('/');
             }
@@ -239,7 +239,7 @@ getProtocol(const StreamBuffer& protocolAndParams)
     StreamBuffer name = protocolAndParams;
     // make name case insensitive
     char* p;
-    for (p = name(); *p; p++) *p = tolower(*p);
+    for (p = name(); *p; p++) *p = tolower((unsigned char)*p);
     // find and make a copy with parameters inserted
     Protocol* protocol;
     for (protocol = protocols; protocol; protocol = protocol->next)
@@ -317,7 +317,7 @@ parseProtocol(Protocol& protocol, StreamBuffer* commands)
             error(line, filename(), "Expect variable name before '%c'\n", token[0]);
             return false;
         }
-        if (token[0] != '@' && !isalpha(token[0]))
+        if (token[0] != '@' && !isalpha((unsigned char)token[0]))
         {
             error(line, filename(), "Unexpected '%s'\n", token());
             return false;

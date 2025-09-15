@@ -103,7 +103,7 @@ parse(const StreamFormat&, StreamBuffer& info,
                 case '%':
                     source++;
                     /* look for formatted fractions like %3f */
-                    if (isdigit(*source))
+                    if (isdigit((unsigned char)*source))
                     {
                         n = strtoul(source, &c, 10);
                         if (*c == 'f')
@@ -123,8 +123,8 @@ parse(const StreamFormat&, StreamBuffer& info,
                     if (*source == '.')
                     {
                         c = (char*) source+1;
-                        n = isdigit(*c) ? strtoul(c, &c, 10) : 9;
-                        if (toupper(*c) == 'S')
+                        n = isdigit((unsigned char)*c) ? strtoul(c, &c, 10) : 9;
+                        if (toupper((unsigned char)*c) == 'S')
                         {
                             source = c;
                             info.print("%%%c.%%0%uf", *c, n);
@@ -198,7 +198,7 @@ static int strmatch(const char*& input, const char** strings, size_t minlen)
                 input += c;
                 return i;
             }
-            if (tolower(input[c]) != strings[i][c]) {
+            if (tolower((unsigned char)input[c]) != strings[i][c]) {
                 if (c >= minlen) {
                     input += c;
                     return i;
@@ -268,7 +268,7 @@ startover:
                 /* ignored */
                     case 'A': /* day of week name */
                     case 'a':
-                        while (isalpha((int)*input)) input++;
+                        while (isalpha((unsigned char)*input)) input++;
                         /* ignore */
                         break;
                     case 'u': /* day of week number (Monday = 1 to Sunday = 7) */
@@ -305,7 +305,7 @@ startover:
                         /* ignore */
                         break;
                     case 'Z': /* time zone name */
-                        while (isalpha((int)*input)) input++;
+                        while (isalpha((unsigned char)*input)) input++;
                         /* ignore */
                         break;
                 /* date */
@@ -425,7 +425,7 @@ startover:
                         if (*format++ != 'f') return NULL;
                         debug ("max %d digits fraction in '%s'\n", n, input);
                         i = 0;
-                        while (n-- && isdigit(*input))
+                        while (n-- && isdigit((unsigned char)*input))
                         {
                             i *= 10;
                             i += *input++ - '0';
@@ -490,7 +490,7 @@ startover:
                 break;
             case ' ':
                 format++;
-                while (isspace(*input)) input++;
+                while (isspace((unsigned char)*input)) input++;
                 break;
             default:
                 if (*format++ != *input++)

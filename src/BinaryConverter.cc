@@ -144,8 +144,8 @@ scanLong(const StreamFormat& fmt, const char* input, long& value)
     size_t consumed = 0;
     char zero = fmt.info[0];
     char one = fmt.info[1];
-    if (!isspace(zero) && !isspace(one))
-        while (isspace(input[consumed])) consumed++; // skip whitespaces
+    if (!isspace((unsigned char)zero) && !isspace((unsigned char)one))
+        while (isspace((unsigned char)input[consumed])) consumed++; // skip whitespaces
     if (input[consumed] != zero && input[consumed] != one) return -1;
     if (fmt.flags & alt_flag)
     {
