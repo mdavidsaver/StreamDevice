@@ -347,11 +347,11 @@ struct {
     DEVSUPFUN read;
 } devaaoStream = {
     5,
-    streamReport,
-    streamInit,
-    initRecord,
-    streamGetIointInfo,
-    streamWrite
+    (DEVSUPFUN) streamReport,
+    (DEVSUPFUN) streamInit,
+    (DEVSUPFUN) initRecord,
+    (DEVSUPFUN) streamGetIointInfo,
+    (DEVSUPFUN) streamWrite
 };
 
 epicsExportAddress(dset,devaaoStream);

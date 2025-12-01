@@ -156,11 +156,11 @@ struct {
     DEVSUPFUN special_linconv;
 } devaoStream = {
     6,
-    streamReport,
-    streamInit,
-    initRecord,
-    streamGetIointInfo,
-    streamWrite,
+    (DEVSUPFUN) streamReport,
+    (DEVSUPFUN) streamInit,
+    (DEVSUPFUN) initRecord,
+    (DEVSUPFUN) streamGetIointInfo,
+    (DEVSUPFUN) streamWrite,
     NULL
 };
 

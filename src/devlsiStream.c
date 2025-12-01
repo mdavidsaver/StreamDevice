@@ -66,11 +66,11 @@ struct {
     DEVSUPFUN read;
 } devlsiStream = {
     5,
-    streamReport,
-    streamInit,
-    initRecord,
-    streamGetIointInfo,
-    streamRead
+    (DEVSUPFUN) streamReport,
+    (DEVSUPFUN) streamInit,
+    (DEVSUPFUN) initRecord,
+    (DEVSUPFUN) streamGetIointInfo,
+    (DEVSUPFUN) streamRead
 };
 
 epicsExportAddress(dset,devlsiStream);

@@ -97,11 +97,11 @@ struct {
     DEVSUPFUN write;
 } devint64outStream = {
     5,
-    streamReport,
-    streamInit,
-    initRecord,
-    streamGetIointInfo,
-    streamWrite
+    (DEVSUPFUN) streamReport,
+    (DEVSUPFUN) streamInit,
+    (DEVSUPFUN) initRecord,
+    (DEVSUPFUN) streamGetIointInfo,
+    (DEVSUPFUN) streamWrite
 };
 
 epicsExportAddress(dset,devint64outStream);

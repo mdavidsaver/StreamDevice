@@ -135,11 +135,11 @@ struct {
     DEVSUPFUN write;
 } devmbboDirectStream = {
     5,
-    streamReport,
-    streamInit,
-    initRecord,
-    streamGetIointInfo,
-    write_mbbo
+    (DEVSUPFUN) streamReport,
+    (DEVSUPFUN) streamInit,
+    (DEVSUPFUN) initRecord,
+    (DEVSUPFUN) streamGetIointInfo,
+    (DEVSUPFUN) write_mbbo
 };
 
 epicsExportAddress(dset,devmbboDirectStream);

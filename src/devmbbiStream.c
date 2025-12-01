@@ -128,11 +128,11 @@ struct {
     DEVSUPFUN read;
 } devmbbiStream = {
     5,
-    streamReport,
-    streamInit,
-    initRecord,
-    streamGetIointInfo,
-    streamRead
+    (DEVSUPFUN) streamReport,
+    (DEVSUPFUN) streamInit,
+    (DEVSUPFUN) initRecord,
+    (DEVSUPFUN) streamGetIointInfo,
+    (DEVSUPFUN) streamRead
 };
 
 epicsExportAddress(dset,devmbbiStream);
